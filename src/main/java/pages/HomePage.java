@@ -14,10 +14,9 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
-    // Seçiciler
-    private By childrenCategory = By.xpath("//a[@class='menu-header-item__title' and @href='/cocuk-bebek-h3']"); // Çocuk & Bebek kategorisi
-    private By girlChildrenSubCategory = By.xpath("//label[contains(.,'5-6')]"); // Kız Çocuk alt kategorisi
-      private By montAndKaban = By.xpath("//a[@href='/kiz-cocuk-dis-giyim-t-1010']"); // Mont ve Kaban
+
+    private By childrenCategory = By.xpath("//a[@class='menu-header-item__title' and @href='/cocuk-bebek-h3']");
+    private By montAndKaban = By.xpath("//a[@href='/kiz-cocuk-dis-giyim-t-1010']"); // Mont ve Kaban
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -27,14 +26,13 @@ public class HomePage extends BasePage {
     @Step("Navigate to Çocuk & Bebek category")
     public void navigateToChildrenCategory() {
         try {
-            // Çocuk & Bebek kategorisine tıkla
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement categoryLink = wait.until(ExpectedConditions.elementToBeClickable(childrenCategory));
             categoryLink.click();
             System.out.println("Çocuk & Bebek kategorisine başarıyla gidildi.");
         } catch (Exception e) {
             System.err.println("Çocuk & Bebek kategorisine giderken hata oluştu: " + e.getMessage());
-            throw e; // Hatanın TestNG'de görünmesini sağlamak için yeniden fırlatılır.
+            throw e;
         }
     }
 
@@ -62,15 +60,12 @@ public class HomePage extends BasePage {
     @Step("scrollToSizeFilterHeader")
     public void scrollToSizeFilterHeader() {
         try {
-            // Bekleme süresi tanımla
+
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-            // Beden başlığı için XPath ile elementi bul
             WebElement sizeFilterHeader = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//body/div[@id='root']/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]")
             ));
-
-            // JavascriptExecutor ile kaydırma işlemini gerçekleştir
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", sizeFilterHeader);
 
             System.out.println("Beden başlığı başarıyla görüntülendi.");

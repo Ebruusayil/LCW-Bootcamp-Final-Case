@@ -37,23 +37,10 @@ public class NavigationHelper {
     public void filterAndSelectProduct() {
         ProductPage productPage = new ProductPage(Driver.getDriver());
         productPage.applyFilters();
-       // productPage.sortByMostSold();
-        //   productPage.sortProducts();
+       // productPage.sortByMostSold();//   productPage.sortProducts();
         //productPage.selectFirstProduct();
     }
 
-    public void verifyAndCheckout(String expectedName, String expectedColor, String expectedQuantity, String expectedAmount) {
-        boolean productDetailsCorrect = cartPage.verifyProductDetails(expectedName, expectedColor, expectedQuantity);
-        boolean amountCorrect = cartPage.verifyTotalAmount(expectedAmount);
 
-        if (productDetailsCorrect && amountCorrect) {
-            cartPage.proceedToCheckout();
-        } else {
-            throw new AssertionError("Product details or total amount are incorrect.");
-        }
-    }
 
-    public void addToFavoritesAndVerify(String productName) {
-        favoritesPage.isProductInFavorites(productName);
     }
-}

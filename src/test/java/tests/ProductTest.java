@@ -15,9 +15,10 @@ public class ProductTest extends BaseTest {
     @Test
     @TestInfo(description = "Filter and select product", tags = {"Product", "Regression"})
     public void testFilterAndSelectProduct() {
-        basePage.closeCookieBannere();
+        basePage.closeCookieBanner();
         navigationHelper.navigateToCategory();
         navigationHelper.filterAndSelectProduct();
+
     }
     }
 

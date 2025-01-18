@@ -10,19 +10,14 @@ public class Driver {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            // WebDriverManager ile ChromeDriver'ı ayarla
+
             WebDriverManager.chromedriver().setup();
-
-            // ChromeOptions oluştur ve ayarları ekle
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--disable-notifications"); // Bildirimleri kapat
-            options.addArguments("--disable-popup-blocking"); // Popup engellemeyi devre dışı bırak
-            options.addArguments("--start-maximized"); // Tarayıcıyı tam ekran başlat
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--start-maximized");
 
-            // ChromeDriver'ı ayarlarla başlat
             driver = new ChromeDriver(options);
-
-            // Pencereyi maksimum boyuta getir
             driver.manage().window().maximize();
         }
         return driver;
