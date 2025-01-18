@@ -13,7 +13,7 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    // URL'ye yönlendirme metodu
+
     public void navigateTo(String url) {
         driver.get(url);
     }

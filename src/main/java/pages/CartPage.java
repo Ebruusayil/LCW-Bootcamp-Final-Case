@@ -13,11 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class CartPage extends BasePage {
- /*   private By productName = By.xpath("//div[@class='cart-item-name']");
-    private By productColor = By.xpath("//div[@class='cart-item-color']");
-    private By productQuantity = By.xpath("//input[@class='cart-item-quantity']");
-    private By totalAmount = By.xpath("//div[@class='total-price']");
-    private By proceedToCheckoutButton = By.id("proceedToCheckout");*/
 
     public CartPage(WebDriver driver) {
         super(driver);

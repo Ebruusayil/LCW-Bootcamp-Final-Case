@@ -45,14 +45,14 @@ public class HomePage extends BasePage {
             WebElement childrenCategory = driver.findElement(By.xpath("//a[@class='menu-header-item__title' and @href='/cocuk-bebek-h3']"));
             actions.moveToElement(childrenCategory).perform();
 
-            //Kız Çocuk kategorisini bekle ve tıkla
+
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             WebElement subCategoryLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'KIZ ÇOCUK')]")));
             subCategoryLink.click();
             System.out.println("Kız Çocuk kategorisine başarıyla gidildi.");
         } catch (Exception e) {
             System.err.println("Kız Çocuk kategorisine giderken hata oluştu: " + e.getMessage());
-            throw e; // Hatanın TestNG'de görünmesini sağlamak için yeniden fırlatılır.
+            throw e;
         }*/
     }
 
