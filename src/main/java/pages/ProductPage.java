@@ -25,7 +25,7 @@ public class ProductPage extends BasePage {
     @Description("Ürünlere ait beden filtrelerini sırasıyla uygular.")
     public void applyFilters() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         closeCookieBanner();
         closeNotificationPopup();
@@ -43,7 +43,6 @@ public class ProductPage extends BasePage {
 
             scrollPageDown();
 
-            // Örnek => 5-6 Yaş filtresi
             retryClickWithPageReload(
                     By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div[6]/div/div[1]/div/div[4]/div/div[2]/div[3]/div[27]/div/span"),
                     "5-6 Yaş filtresi"

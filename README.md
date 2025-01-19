@@ -52,3 +52,6 @@ POM, test otomasyonu projelerinde kullanılan bir tasarım desenidir. Proje kodl
 ### 2. Maven Bağımlılıkları
 pom.xml dosyasına bağımlılıkları eklemeniz gerekmekteir.
 
+## Test çalışırken çekmiş olduğum bazı resimler 
+![img.png](img.png)
+![img_1.png](img_1.png)

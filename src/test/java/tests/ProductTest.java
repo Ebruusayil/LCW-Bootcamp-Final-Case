@@ -10,7 +10,6 @@ public class ProductTest extends BaseTest {
     private NavigationHelper navigationHelper = new NavigationHelper();
     public static WebDriver driver;
 
-
     private BasePage basePage = new BasePage(driver);
     @Test
     @TestInfo(description = "Filter and select product", tags = {"Product", "Regression"})
