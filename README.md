@@ -55,3 +55,4 @@ pom.xml dosyasına bağımlılıkları eklemeniz gerekmekteir.
 ## Test çalışırken çekmiş olduğum bazı resimler 
 ![img.png](img.png)
 ![img_1.png](img_1.png)
+![img_2.png](img_2.png)
