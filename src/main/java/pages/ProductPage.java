@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.AllureUtils;
 
 import java.time.Duration;
 
@@ -24,7 +25,7 @@ public class ProductPage extends BasePage {
     @Description("Ürünlere ait beden filtrelerini sırasıyla uygular.")
     public void applyFilters() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         closeCookieBanner();
         closeNotificationPopup();
@@ -109,6 +110,7 @@ public class ProductPage extends BasePage {
 
         } catch (Exception e) {
             System.err.println("İşlem sırasında hata oluştu: " + e.getMessage());
+            AllureUtils.takeScreenshot(driver);
         }
     }
 
@@ -132,6 +134,7 @@ public class ProductPage extends BasePage {
 
         } catch (Exception e) {
             System.err.println("Favoriye ekleme işlemi sırasında hata oluştu: " + e.getMessage());
+            AllureUtils.takeScreenshot(driver);
         }
     }
 
@@ -152,33 +155,19 @@ public class ProductPage extends BasePage {
             System.err.println("Favoriler sayfasına gidilemedi: " + e.getMessage());
         }
     }
-
-    @Step("Navigate to cart")
-    @Severity(SeverityLevel.NORMAL)
-    private void navigateToCart() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        try {
-            WebElement productLink = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//*[@id=\"header__container\"]/header/div[1]/div[3]/div/div[2]/a")
-            ));
-            productLink.click();
-            System.out.println("Sepet sayfasına yönlendirildi.");
-        } catch (Exception e) {
-            System.err.println("Sepet sayfasına yönlendirilemedi: " + e.getMessage());
-        }
-    }
-
     @Step("Select size and add product to cart")
     @Severity(SeverityLevel.CRITICAL)
     private void navigateAndSelectSizeAndAddToCart() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
+            // Ürün detayına yönlendirme
             WebElement productLink = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div[6]/div/div[2]/div[4]/a/div[1]/img")
             ));
             productLink.click();
             System.out.println("Ürün detay sayfasına yönlendirildi.");
 
+            // Beden seçimi
             for (int i = 1; i <= 8; i++) {
                 String sizeXPath = "//*[@id=\"product-detail-add-to-card-operation\"]/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[" + i + "]";
                 WebElement sizeElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(sizeXPath)));
@@ -189,18 +178,52 @@ public class ProductPage extends BasePage {
                     break;
                 }
             }
-            Thread.sleep(3000);
+            Thread.sleep(2000);
 
+            // Sepete ekleme
             WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//*[@id=\"product-detail-add-to-card-operation\"]/div/div[2]/button")
             ));
+            scrollPageDown();
             addToCartButton.click();
             System.out.println("Ürün sepete eklendi.");
-            Thread.sleep(3000);
+
+            // Sepete eklenme durumunu kontrol et
+            WebElement cartSuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[contains(text(),'Ürün sepete eklendi')]") // Sepete eklenme mesajının XPath'ini kontrol edin
+            ));
+            System.out.println("Sepete eklenme doğrulandı: " + cartSuccessMessage.getText());
+
+            // Sepet ekranına git
+            WebElement cartButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//*[@id=\"header-cart\"]") // Sepet butonunun XPath'ini kontrol edin
+            ));
+            cartButton.click();
+            System.out.println("Sepet ekranına geçildi.");
 
         } catch (Exception e) {
             System.err.println("İşlem sırasında hata oluştu: " + e.getMessage());
+            AllureUtils.takeScreenshot(driver);
         }
     }
+
+
+    @Step("Navigate to cart")
+    @Severity(SeverityLevel.NORMAL)
+    private void navigateToCart() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            WebElement productLink = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//*[@id=\"header__container\"]/header/div[1]/div[3]/div/div[2]/a")
+            ));
+            productLink.click();
+            System.out.println("Sepet sayfasına yönlendirildi.");
+        } catch (Exception e) {
+            System.err.println("Sepet sayfasına yönlendirilemedi: " + e.getMessage());
+            AllureUtils.takeScreenshot(driver);
+        }
+    }
+
+
 
 }

@@ -36,10 +36,7 @@ public class BasePage {
         driver.manage().deleteAllCookies();
         return driver;
     }
-    protected static String productTitle;
-    protected static String productSeller;
-    protected static String productColor;
-    protected static String productSize;
+
     public void scrollPageDown() {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500);");
         System.out.println("Sayfa aşağı kaydırıldı.");
