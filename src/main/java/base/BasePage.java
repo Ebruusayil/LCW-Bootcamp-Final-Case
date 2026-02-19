@@ -1,46 +1,29 @@
 package base;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.time.Duration;
 
-
 public class BasePage {
-    public static WebDriver driver;
-    public static WebDriverWait wait;
-    public final String baseURL = "https://www.lcw.com/";
+    protected final WebDriver driver;
 
-    private By cookieBanner = By.id("cookieseal-banner-accept");
+    private final By cookieBanner = By.id("cookieseal-banner-accept");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-    }
-    @BeforeAll
-    public WebDriver initializeDriver() {
-        ChromeOptions cop = new ChromeOptions();
-        cop.addArguments(new String[]{"--remote-allow-origins=*"});
-        cop.addArguments(new String[]{"--disable-notifications"});
-        driver = new ChromeDriver(cop);
-        driver.navigate().to("https://www.lcw.com/");
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        return driver;
     }
 
     public void scrollPageDown() {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500);");
         System.out.println("Sayfa aşağı kaydırıldı.");
     }
+
     public void scrollToTop() {
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0);");
         System.out.println("Sayfa en üstüne kaydırıldı.");
@@ -113,5 +96,4 @@ public class BasePage {
             System.out.println("Çerez banner'ı bulunamadı veya zaten kapalı.");
         }
     }
-
 }
