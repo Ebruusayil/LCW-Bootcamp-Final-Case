@@ -1,6 +1,6 @@
 package Navigations;
 
-import base.Driver;
+import org.openqa.selenium.WebDriver;
 import pages.CartPage;
 import pages.FavoritesPage;
 import pages.HomePage;
@@ -8,18 +8,20 @@ import pages.LoginPage;
 import pages.ProductPage;
 
 public class NavigationHelper {
-    private LoginPage loginPage;
-    private HomePage homePage;
-    private ProductPage productPage;
-    private CartPage cartPage;
-    private FavoritesPage favoritesPage;
+    private final LoginPage loginPage;
+    private final HomePage homePage;
+    private final ProductPage productPage;
+    @SuppressWarnings("unused")
+    private final CartPage cartPage;
+    @SuppressWarnings("unused")
+    private final FavoritesPage favoritesPage;
 
-    public NavigationHelper() {
-        this.loginPage = new LoginPage(Driver.getDriver());
-        this.homePage = new HomePage(Driver.getDriver());
-        this.productPage = new ProductPage(Driver.getDriver());
-        this.cartPage = new CartPage(Driver.getDriver());
-        this.favoritesPage = new FavoritesPage(Driver.getDriver());
+    public NavigationHelper(WebDriver driver) {
+        this.loginPage = new LoginPage(driver);
+        this.homePage = new HomePage(driver);
+        this.productPage = new ProductPage(driver);
+        this.cartPage = new CartPage(driver);
+        this.favoritesPage = new FavoritesPage(driver);
     }
 
     public void login(String email, String password) {
@@ -28,19 +30,12 @@ public class NavigationHelper {
     }
 
     public void navigateToCategory() {
-        HomePage homePage = new HomePage(Driver.getDriver());
         homePage.navigateToChildrenCategory();
         homePage.navigateToGirlChildrenCategory();
         homePage.scrollToSizeFilterHeader();
     }
 
     public void filterAndSelectProduct() {
-        ProductPage productPage = new ProductPage(Driver.getDriver());
         productPage.applyFilters();
-       // productPage.sortByMostSold();//   productPage.sortProducts();
-        //productPage.selectFirstProduct();
     }
-
-
-
-    }
+}
